@@ -1,0 +1,19 @@
+<div id="<%= dom_id part %>" class="flex items-center border-2 border-black rounded-md my-3 p-3 space-x-3">
+  <div class="my-5">
+    <strong class="block font-medium mb-1">Title:</strong>
+    <%= part.title %>
+  </div>
+  <div class="my-5">
+    <strong class="block font-medium mb-1">Serial:</strong>
+    <%= part.serial %>
+  </div>
+  <div class="my-5">
+    <strong class="block font-medium mb-1">Assembly:</strong>
+    <%= part.assembly.serial %>
+  </div>
+  <% if action_name != "show" %>
+    <%= link_to "Show this part", part, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this part", edit_part_path(part), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
