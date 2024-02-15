@@ -2,12 +2,24 @@
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
-  <h1>Completed 200 OK in 2750ms (Views: 2414.9ms | ActiveRecord: 331.4ms | Allocations: 1631222)</h1>
+  <h1>ORIGINAL: Completed 200 OK in 5991ms (Views: 5225.6ms | ActiveRecord: 760.0ms | Allocations: 1631319)</h1>
+  <h1>WITH includes: Completed 200 OK in 3003ms (Views: 2630.9ms | ActiveRecord: 369.3ms | Allocations: 1143432)</h1>
+  <h1>REMOVING COUNT: Completed 200 OK in 1589ms (Views: 1569.4ms | ActiveRecord: 15.0ms | Allocations: 662315)</h1>
+  <h1>TURBO DRIVE LAZY LOADING: Completed 200 OK in 321ms (Views: 303.1ms | ActiveRecord: 13.4ms | Allocations: 126412)</h1>
+  <hr>
+  <h1>PARTIAL ORIGINAL PERF: Completed 200 OK in 29ms (Views: 17.6ms | ActiveRecord: 3.4ms | Allocations: 8116)</h1>
+  <h1>PARTIAL WITH INCLUDE PERF: Completed 200 OK in 18ms (Views: 8.6ms | ActiveRecord: 1.0ms | Allocations: 5509)</h1>
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Assemblies</h1>
     <%= link_to "New assembly", new_assembly_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
   <div id="assemblies" class="min-w-full">
-    <%= render @assemblies %>
+    <% @assemblies.each do |assembly| %>
+      <%= turbo_frame_tag assembly, src: assembly_path(assembly), loading: :lazy do %>
+        <div class="bg-gray-200 p-3 rounded-md my-3 border-2 border-black shadow-lg animate-pulse">
+          <p>Loading...</p>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>

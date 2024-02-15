@@ -9,7 +9,7 @@
       <%= assembly.serial %>
     </p>
     <div class="my-5">
-      <p class="block font-medium mb-1">Parts: <%= assembly.parts.count %></p>
+      <p class="block font-medium mb-1">Parts: <%# assembly.parts.count %></p>
       <%= render assembly.parts %>
     </div>
     <% if action_name != "show" %>
